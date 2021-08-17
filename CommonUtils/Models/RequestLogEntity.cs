@@ -10,18 +10,18 @@ namespace CommonUtils.Models
         public string RequestMethod { get; }
         public string RequestController { get; }
         public string CorrelationId { get; }
-        public DateTime RequestTime { get; }
+        public DateTime RequestedOn { get; }
         public string RequestorIP { get; }
         public string RequestUrl { get; }
         public bool isHttps { get; }
         public string QueryString { get; }
         public string RequestorId { get; }
-        public int StatusCode { get; }
+        public int StatusCode { get; private set; }
+        public DateTime RespondedOn { get; private set; }
 
         public RequestLogEntity(string requestMethod,
                                 string requestController,
                                 string correlationId,
-                                DateTime requestTime,
                                 string requestorIP,
                                 string requestUrl,
                                 bool isHttps,
@@ -32,13 +32,24 @@ namespace CommonUtils.Models
             RequestMethod = requestMethod;
             RequestController = requestController;
             CorrelationId = correlationId;
-            RequestTime = requestTime;
+            RequestedOn = DateTime.UtcNow;
             RequestorIP = requestorIP;
             RequestUrl = requestUrl;
             this.isHttps = isHttps;
             QueryString = queryString;
             RequestorId = requestorId;
-            StatusCode = statusCode;
+            PartitionKey = $"{requestMethod}:{RequestController}";
+            RowKey = $"{CorrelationId}:{RequestedOn.AddMilliseconds(-RequestedOn.Millisecond).Ticks}";
+        }
+
+        public RequestLogEntity()
+        {
+        }
+
+        public void SetResponseDate(int statusCode)
+        {
+            this.StatusCode = statusCode;
+            RespondedOn = DateTime.UtcNow;
         }
     }
 }
