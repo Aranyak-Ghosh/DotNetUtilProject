@@ -26,8 +26,7 @@ namespace CommonUtils.Models
                                 string requestUrl,
                                 bool isHttps,
                                 string queryString,
-                                string requestorId,
-                                int statusCode)
+                                string requestorId)
         {
             RequestMethod = requestMethod;
             RequestController = requestController;
@@ -46,7 +45,7 @@ namespace CommonUtils.Models
         {
         }
 
-        public void SetResponseDate(int statusCode)
+        public void SetResponseData(int statusCode)
         {
             this.StatusCode = statusCode;
             RespondedOn = DateTime.UtcNow;
