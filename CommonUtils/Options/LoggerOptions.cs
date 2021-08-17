@@ -8,6 +8,7 @@ namespace CommonUtils.Options
     {
         public static string Accessor { get { return Key; } set { Key = "Logger:StorageAccount"; } }
         public string ConnectionString { get; }
+        public string TableName { get; }
     }
 
     public class SQLLoggerOptions : BaseOptions
@@ -15,5 +16,6 @@ namespace CommonUtils.Options
         public static string Accessor { get { return Key; } set { Key = "Logger:SQL"; } }
 
         public string ConnectionString { get; }
+        public string TableName { get; }
     }
 }
