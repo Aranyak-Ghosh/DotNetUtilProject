@@ -8,7 +8,7 @@ using System.Text;
 
 namespace CommonUtils.Builder
 {
-    public class DbContextBuilder<TContext> where TContext : DbContext, new()
+    public class DbContextBuilder<TContext> : IDbContextBuilder<TContext> where TContext : DbContext, new()
     {
         private readonly DatabaseOptions _options;
 
@@ -21,15 +21,15 @@ namespace CommonUtils.Builder
         {
             var buildOptions = new DbContextOptionsBuilder<TContext>();
 
-            if(_options.DatabaseProvider == DatabaseProviders.MSSQL)
-                buildOptions.UseSqlServer(_options.ConnectionString, x=>x.UseNetTopologySuite());
+            if (_options.DatabaseProvider == DatabaseProviders.MSSQL)
+                buildOptions.UseSqlServer(_options.ConnectionString, x => x.UseNetTopologySuite());
             if (_options.DatabaseProvider == DatabaseProviders.Postgres)
                 buildOptions.UseNpgsql(_options.ConnectionString);
             if (_options.DatabaseProvider == DatabaseProviders.MySQL)
                 buildOptions.UseMySQL(_options.ConnectionString);
 
-            TContext context = (TContext) new DbContext(buildOptions.Options);
-            
+            TContext context = (TContext)new DbContext(buildOptions.Options);
+
             return context;
         }
     }

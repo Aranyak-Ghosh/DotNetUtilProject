@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CommonUtils.Abstractions
+namespace CommonUtils.Abstractions.Interface
 {
     public interface IRepository<T> where T : Entity.BaseEntity
     {
