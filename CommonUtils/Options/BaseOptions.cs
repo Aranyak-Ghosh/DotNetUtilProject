@@ -6,6 +6,6 @@ namespace CommonUtils.Options
 {
     public class BaseOptions
     {
-        public string Key { get; protected set; }
+        protected static string Key { get; set; }
     }
 }
