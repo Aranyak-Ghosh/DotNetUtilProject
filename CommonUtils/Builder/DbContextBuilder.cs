@@ -1,10 +1,8 @@
-﻿using CommonUtils.Constants;
+﻿using CommonUtils.Abstractions.Interface;
+using CommonUtils.Constants;
 using CommonUtils.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CommonUtils.Builder
 {
